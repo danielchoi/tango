@@ -11,14 +11,29 @@ const VALUE_FROM_NAME = {
   M: 2,
 };
 
+const NEXT_VALUE = {
+  0: 1,
+  1: 2,
+  2: 0,
+};
+
 let puzzle = null;
 let state = [];
 let givenLookup = new Map();
+let timerStartedAt = null;
+let timerElapsedMs = 0;
+let timerIntervalId = null;
+let timerStopped = false;
+let conflictTimeoutId = null;
+let conflictRenderToken = 0;
+let visibleConflictKeys = new Set();
+let visibleConflictMessages = [];
 
 const boardEl = document.getElementById("board");
 const statusTextEl = document.getElementById("status-text");
 const difficultyEl = document.getElementById("difficulty");
 const puzzleIdEl = document.getElementById("puzzle-id");
+const timerEl = document.getElementById("timer");
 const messageEl = document.getElementById("message");
 const issuesEl = document.getElementById("issues");
 const puzzlePickerEl = document.getElementById("puzzle-picker");
@@ -36,6 +51,7 @@ function loadPuzzle(nextPuzzle) {
   givenLookup = new Map(
     puzzle.givens.map((given) => [keyFor(given.r, given.c), given.value]),
   );
+  resetTimer();
   resetState();
   puzzleIdEl.textContent = puzzle.id;
   difficultyEl.textContent = puzzle.difficulty?.label ?? "-";
@@ -109,7 +125,7 @@ function renderBoard() {
   ).join(" ");
 
   const validation = validateBoard(state, false);
-  const errorKeys = new Set(validation.errorCells.map(([r, c]) => keyFor(r, c)));
+  syncConflictDisplay(validation);
 
   for (let r = 0; r < puzzle.size; r += 1) {
     for (let c = 0; c < puzzle.size; c += 1) {
@@ -127,18 +143,21 @@ function renderBoard() {
       if (given) {
         cell.classList.add("given");
       }
-      if (errorKeys.has(keyFor(r, c))) {
+      if (visibleConflictKeys.has(keyFor(r, c))) {
         cell.classList.add("error");
       }
       cell.textContent = SYMBOLS[value];
       cell.style.gridColumn = String(c * 2 + 1);
       cell.style.gridRow = String(r * 2 + 1);
+      cell.dataset.row = String(r);
+      cell.dataset.col = String(c);
       cell.setAttribute("aria-label", `Row ${r + 1} column ${c + 1}`);
       cell.addEventListener("click", () => {
         if (given) {
           return;
         }
-        state[indexFor(r, c)] = (state[indexFor(r, c)] + 1) % 3;
+        startTimer();
+        state[indexFor(r, c)] = NEXT_VALUE[state[indexFor(r, c)]];
         renderBoard();
       });
       boardEl.appendChild(cell);
@@ -261,16 +280,17 @@ function updateStatus(validation) {
   issuesEl.innerHTML = "";
   if (validation.solved) {
     statusTextEl.textContent = "Solved";
-    showMessage("Puzzle solved.", "ok");
+    stopTimer();
+    showMessage(`Puzzle solved in ${formatElapsed(timerElapsedMs)}.`, "ok");
     return;
   }
-  statusTextEl.textContent = validation.errors.length > 0 ? "Has conflicts" : "In progress";
-  if (validation.errors.length === 0) {
+  statusTextEl.textContent = visibleConflictMessages.length > 0 ? "Has conflicts" : "In progress";
+  if (visibleConflictMessages.length === 0) {
     showMessage("No rule conflicts detected.");
     return;
   }
   showMessage("There are rule conflicts on the board.", "error");
-  for (const error of validation.errors) {
+  for (const error of visibleConflictMessages) {
     const item = document.createElement("li");
     item.textContent = error;
     issuesEl.appendChild(item);
@@ -280,6 +300,93 @@ function updateStatus(validation) {
 function showMessage(text, tone = "") {
   messageEl.textContent = text;
   messageEl.className = tone;
+}
+
+function resetTimer() {
+  if (timerIntervalId !== null) {
+    window.clearInterval(timerIntervalId);
+    timerIntervalId = null;
+  }
+  timerStartedAt = null;
+  timerElapsedMs = 0;
+  timerStopped = false;
+  timerEl.textContent = "00:00";
+}
+
+function startTimer() {
+  if (timerStartedAt !== null || timerStopped) {
+    return;
+  }
+  timerStartedAt = Date.now();
+  timerIntervalId = window.setInterval(() => {
+    timerElapsedMs = Date.now() - timerStartedAt;
+    timerEl.textContent = formatElapsed(timerElapsedMs);
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerStopped) {
+    return;
+  }
+  timerStopped = true;
+  if (timerStartedAt !== null) {
+    timerElapsedMs = Date.now() - timerStartedAt;
+  }
+  if (timerIntervalId !== null) {
+    window.clearInterval(timerIntervalId);
+    timerIntervalId = null;
+  }
+  timerEl.textContent = formatElapsed(timerElapsedMs);
+}
+
+function syncConflictDisplay(validation) {
+  conflictRenderToken += 1;
+  const renderToken = conflictRenderToken;
+
+  if (validation.solved || validation.errors.length === 0) {
+    clearConflictTimeout();
+    visibleConflictKeys = new Set();
+    visibleConflictMessages = [];
+    return;
+  }
+
+  clearConflictTimeout();
+  conflictTimeoutId = window.setTimeout(() => {
+    if (renderToken !== conflictRenderToken) {
+      return;
+    }
+    visibleConflictKeys = new Set(validation.errorCells.map(([r, c]) => keyFor(r, c)));
+    visibleConflictMessages = validation.errors;
+    updateStatus(validation);
+    paintVisibleConflicts();
+  }, 500);
+}
+
+function clearConflictTimeout() {
+  if (conflictTimeoutId !== null) {
+    window.clearTimeout(conflictTimeoutId);
+    conflictTimeoutId = null;
+  }
+}
+
+function paintVisibleConflicts() {
+  for (const cell of boardEl.querySelectorAll(".cell")) {
+    const row = Number(cell.dataset.row);
+    const col = Number(cell.dataset.col);
+    cell.classList.toggle("error", visibleConflictKeys.has(keyFor(row, col)));
+  }
+}
+
+function formatElapsed(ms) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) {
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
 function indexFor(r, c) {

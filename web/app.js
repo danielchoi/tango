@@ -31,33 +31,6 @@ puzzlePickerEl.addEventListener("change", async (event) => {
   await loadPackedPuzzle(fileName);
 });
 
-document.getElementById("reset-btn").addEventListener("click", () => {
-  resetState();
-  renderBoard();
-  showMessage("Puzzle reset.");
-});
-
-document.getElementById("check-btn").addEventListener("click", () => {
-  renderBoard();
-});
-
-document.getElementById("reveal-btn").addEventListener("click", () => {
-  state = decodeSolution(puzzle.solution);
-  renderBoard();
-  showMessage("Solution revealed.", "ok");
-});
-
-document.getElementById("file-input").addEventListener("change", async (event) => {
-  const file = event.target.files?.[0];
-  if (!file) {
-    return;
-  }
-  const raw = await file.text();
-  loadPuzzle(JSON.parse(raw));
-  puzzlePickerEl.value = "";
-  event.target.value = "";
-});
-
 function loadPuzzle(nextPuzzle) {
   puzzle = normalizePuzzle(nextPuzzle);
   givenLookup = new Map(
@@ -129,10 +102,10 @@ function resetState() {
 function renderBoard() {
   boardEl.innerHTML = "";
   boardEl.style.gridTemplateColumns = Array.from({ length: puzzle.size * 2 - 1 }, (_, index) =>
-    index % 2 === 0 ? "var(--cell-size)" : "var(--clue-size)",
+    index % 2 === 0 ? "4fr" : "1.15fr",
   ).join(" ");
   boardEl.style.gridTemplateRows = Array.from({ length: puzzle.size * 2 - 1 }, (_, index) =>
-    index % 2 === 0 ? "var(--cell-size)" : "var(--clue-size)",
+    index % 2 === 0 ? "4fr" : "1.15fr",
   ).join(" ");
 
   const validation = validateBoard(state, false);

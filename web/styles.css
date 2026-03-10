@@ -11,8 +11,6 @@
   --sun-soft: #fff1b8;
   --error: #a52b2b;
   --ok: #246b45;
-  --cell-size: clamp(2.45rem, 9vw, 3.3rem);
-  --clue-size: clamp(0.8rem, 3vw, 1.05rem);
 }
 
 * {
@@ -93,36 +91,13 @@ body {
 
 .actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.65rem;
-}
-
-button,
-.file-picker {
-  border: 0;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.9rem;
-  padding: 0.8rem 1rem;
-  font: inherit;
-  cursor: pointer;
-  color: #fff8eb;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-  box-shadow: 0 10px 24px rgba(146, 81, 22, 0.16);
-  text-align: center;
-}
-
-button:hover,
-.file-picker:hover {
-  transform: translateY(-1px);
 }
 
 .picker-shell {
   display: grid;
   gap: 0.22rem;
-  grid-column: 1 / -1;
   min-width: 0;
 }
 
@@ -150,18 +125,16 @@ button:hover,
 }
 
 .board-wrap {
-  display: grid;
-  justify-items: start;
-  overflow-x: auto;
+  display: block;
+  width: 100%;
   margin: 1rem 0;
-  padding-bottom: 0.4rem;
-  -webkit-overflow-scrolling: touch;
 }
 
 .board {
   display: grid;
   gap: 0;
-  min-width: max-content;
+  width: 100%;
+  aspect-ratio: 1;
   padding: 0.7rem;
   background: rgba(255, 252, 247, 0.76);
   border: 1px solid rgba(58, 43, 28, 0.12);
@@ -170,8 +143,8 @@ button:hover,
 }
 
 .cell {
-  width: var(--cell-size);
-  height: var(--cell-size);
+  width: 100%;
+  height: 100%;
   border: 1px solid rgba(58, 43, 28, 0.12);
   border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.9);
@@ -208,8 +181,8 @@ button:hover,
 .relation {
   display: grid;
   place-items: center;
-  width: var(--clue-size);
-  height: var(--clue-size);
+  width: 100%;
+  height: 100%;
   align-self: center;
   justify-self: center;
   color: var(--accent-strong);
@@ -248,11 +221,6 @@ button:hover,
 }
 
 @media (min-width: 640px) {
-  :root {
-    --cell-size: clamp(3rem, 6vw, 3.8rem);
-    --clue-size: clamp(1rem, 1.8vw, 1.3rem);
-  }
-
   .shell {
     width: min(100vw - 1.5rem, 1100px);
     padding-top: 1.4rem;
@@ -275,12 +243,11 @@ button:hover,
   }
 
   .actions {
-    grid-template-columns: minmax(15rem, 1.4fr) repeat(4, minmax(0, 1fr));
+    grid-template-columns: minmax(15rem, 1fr);
     align-items: end;
   }
 
   .board-wrap {
-    justify-items: center;
     margin: 1.35rem 0;
   }
 
@@ -291,11 +258,6 @@ button:hover,
 }
 
 @media (min-width: 900px) {
-  :root {
-    --cell-size: 4rem;
-    --clue-size: 1.5rem;
-  }
-
   .shell {
     width: min(100vw - 2rem, 1100px);
     padding: 2rem 0 3rem;
@@ -330,11 +292,9 @@ button:hover,
   }
 
   .actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: minmax(18rem, 22rem);
+    justify-content: end;
   }
 
   .picker-shell {

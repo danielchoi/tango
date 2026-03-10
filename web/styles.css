@@ -264,6 +264,7 @@ body {
   animation:
     confetti-fall linear forwards,
     confetti-spin 700ms linear infinite;
+  will-change: transform;
 }
 
 @keyframes confetti-fall {

@@ -28,6 +28,8 @@ let conflictRenderToken = 0;
 let visibleConflictKeys = new Set();
 let visibleConflictMessages = [];
 let confettiPlayed = false;
+let packedPuzzleFiles = [];
+let autoAdvanceTimeoutId = null;
 
 const boardEl = document.getElementById("board");
 const statusTextEl = document.getElementById("status-text");
@@ -53,6 +55,7 @@ function loadPuzzle(nextPuzzle) {
   );
   resetTimer();
   resetState();
+  clearAutoAdvance();
   clearConfetti();
   confettiPlayed = false;
   puzzleIdEl.textContent = puzzle.id;
@@ -72,7 +75,7 @@ async function loadPackedPuzzle(fileName) {
 }
 
 async function loadPuzzleManifest() {
-  const packedPuzzleFiles = window.TANGO_GENERATED_PACK?.files ?? [];
+  packedPuzzleFiles = window.TANGO_GENERATED_PACK?.files ?? [];
   if (packedPuzzleFiles.length > 0) {
     populatePuzzlePicker(packedPuzzleFiles);
     puzzlePickerEl.value = packedPuzzleFiles[0];
@@ -292,8 +295,9 @@ function updateStatus(validation) {
     if (!confettiPlayed) {
       launchConfetti();
       confettiPlayed = true;
+      scheduleNextPuzzle();
     }
-    showMessage(`Puzzle solved in ${formatElapsed(timerElapsedMs)}.`, "ok");
+    showMessage(`Puzzle solved in ${formatElapsed(timerElapsedMs)}. Next puzzle in 4 seconds.`, "ok");
     return;
   }
   statusTextEl.textContent = visibleConflictMessages.length > 0 ? "Has conflicts" : "In progress";
@@ -402,7 +406,7 @@ function launchConfetti() {
     piece.style.left = `${Math.random() * 100}%`;
     piece.style.background = colors[index % colors.length];
     piece.style.animationDelay = `${Math.random() * 0.35}s`;
-    piece.style.animationDuration = `${2.1 + Math.random() * 1.2}s`;
+    piece.style.animationDuration = `${3.2 + Math.random() * 0.8}s`;
     piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 18}vw`);
     piece.style.transform = `rotate(${Math.random() * 360}deg)`;
     layer.appendChild(piece);
@@ -413,13 +417,43 @@ function launchConfetti() {
     if (layer.parentNode) {
       layer.remove();
     }
-  }, 3600);
+  }, 4000);
 }
 
 function clearConfetti() {
   for (const layer of document.querySelectorAll(".confetti-layer")) {
     layer.remove();
   }
+}
+
+function scheduleNextPuzzle() {
+  clearAutoAdvance();
+  autoAdvanceTimeoutId = window.setTimeout(() => {
+    const nextFile = pickRandomNextPuzzle();
+    if (!nextFile) {
+      return;
+    }
+    puzzlePickerEl.value = nextFile;
+    loadPackedPuzzle(nextFile);
+  }, 4000);
+}
+
+function clearAutoAdvance() {
+  if (autoAdvanceTimeoutId !== null) {
+    window.clearTimeout(autoAdvanceTimeoutId);
+    autoAdvanceTimeoutId = null;
+  }
+}
+
+function pickRandomNextPuzzle() {
+  if (packedPuzzleFiles.length === 0) {
+    return null;
+  }
+
+  const currentFile = `${puzzle.id}.json`;
+  const candidates = packedPuzzleFiles.filter((fileName) => fileName !== currentFile);
+  const pool = candidates.length > 0 ? candidates : packedPuzzleFiles;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 function formatElapsed(ms) {

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tango</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Sun and Moon</p>
+        <h1>Tango</h1>
+        <p class="intro">
+          Fill the grid with suns and moons. Every row and column must contain the same number
+          of each symbol, no line can contain three identical symbols in a row, and every clue
+          between cells must stay true.
+        </p>
+      </section>
+
+      <section class="panel controls">
+        <div class="meta">
+          <div>
+            <span class="label">Puzzle</span>
+            <strong id="puzzle-id">Sample</strong>
+          </div>
+          <div>
+            <span class="label">Difficulty</span>
+            <strong id="difficulty">-</strong>
+          </div>
+          <div>
+            <span class="label">Status</span>
+            <strong id="status-text">In progress</strong>
+          </div>
+        </div>
+
+        <div class="actions">
+          <label class="picker-shell" for="puzzle-picker">
+            <span class="picker-label">Puzzle Pack</span>
+            <select id="puzzle-picker" aria-label="Select a generated puzzle">
+              <option value="">Loading puzzles...</option>
+            </select>
+          </label>
+          <button id="reset-btn" type="button">Reset</button>
+          <button id="check-btn" type="button">Check</button>
+          <button id="reveal-btn" type="button">Reveal</button>
+          <label class="file-picker" for="file-input">Load JSON</label>
+          <input id="file-input" type="file" accept=".json,application/json">
+        </div>
+      </section>
+
+      <section class="board-wrap">
+        <div id="board" class="board" aria-label="Tango puzzle board"></div>
+      </section>
+
+      <section class="panel notes">
+        <p id="message">
+          Click an empty cell to cycle through blank, sun, and moon. Givens are locked.
+        </p>
+        <ul id="issues" class="issues"></ul>
+      </section>
+    </main>
+
+    <script src="./sample-puzzle.js"></script>
+    <script src="./generated-pack.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

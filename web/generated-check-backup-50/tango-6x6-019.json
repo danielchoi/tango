@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "id": "tango-6x6-019",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 4,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 3,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 3,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 2,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 4,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 5,
+      "value": "moon"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 0,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 0,
+      "c": 1,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 0,
+      "c": 4,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 0,
+      "c": 4,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 3,
+      "c": 3,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "dir": "down",
+      "type": "same"
+    }
+  ],
+  "solution": [
+    "MMSMSS",
+    "SSMMSM",
+    "SMMSMS",
+    "MMSSMS",
+    "MSSMSM",
+    "SSMSMM"
+  ],
+  "difficulty": {
+    "label": "medium",
+    "score": 54,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "seed": 1773119283866117542
+  }
+}

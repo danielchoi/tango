@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "id": "tango-6x6-004",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 0,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 5,
+      "c": 1,
+      "value": "moon"
+    }
+  ],
+  "relations": [
+    {
+      "r": 2,
+      "c": 5,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 3,
+      "c": 4,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 0,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "dir": "down",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "SSMMSM",
+    "MMSMSS",
+    "SMMSMS",
+    "SSMSMM",
+    "MSSMSM",
+    "MMSSMS"
+  ],
+  "difficulty": {
+    "label": "hard",
+    "score": 174,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "searchNodes": 1,
+    "seed": 1773119283865998757
+  }
+}

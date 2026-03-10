@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "id": "tango-6x6-097",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 4,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 4,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 3,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 2,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 0,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 3,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 1,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 4,
+      "dir": "right",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "SSMMSM",
+    "MMSMSS",
+    "MMSSMS",
+    "SSMMSM",
+    "MSMSMS",
+    "SMSSMM"
+  ],
+  "difficulty": {
+    "label": "medium",
+    "score": 73,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "seed": 1773119888520414224
+  }
+}

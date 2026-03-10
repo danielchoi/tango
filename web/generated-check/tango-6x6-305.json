@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "id": "tango-6x6-305",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 2,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 3,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 2,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 4,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 5,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 3,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 2,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 3,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 5,
+      "c": 0,
+      "dir": "right",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "MSMSSM",
+    "MMSMSS",
+    "SSMSMM",
+    "SSMSMM",
+    "MMSMSS",
+    "SMSMMS"
+  ],
+  "difficulty": {
+    "label": "medium",
+    "score": 42,
+    "techniques": [
+      "relation",
+      "triple"
+    ],
+    "seed": 1773119888522061376
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "id": "tango-6x6-803",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 0,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 3,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 4,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 5,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 0,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 0,
+      "c": 5,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 0,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "dir": "right",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "SSMSMM",
+    "MMSSMS",
+    "SSMMSM",
+    "MMSSMS",
+    "MMSMSS",
+    "SSMMSM"
+  ],
+  "difficulty": {
+    "label": "hard",
+    "score": 120,
+    "techniques": [
+      "relation",
+      "triple"
+    ],
+    "searchNodes": 6,
+    "seed": 1773119888526005038
+  }
+}

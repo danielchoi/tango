@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "id": "tango-6x6-531",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 4,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "value": "moon"
+    },
+    {
+      "r": 3,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 5,
+      "c": 1,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 1,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 1,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 5,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 5,
+      "c": 1,
+      "dir": "right",
+      "type": "same"
+    }
+  ],
+  "solution": [
+    "SMMSMS",
+    "MSSMSM",
+    "SSMSMM",
+    "SMMSMS",
+    "MMSMSS",
+    "MSSMSM"
+  ],
+  "difficulty": {
+    "label": "hard",
+    "score": 129,
+    "techniques": [
+      "relation",
+      "triple"
+    ],
+    "searchNodes": 1,
+    "seed": 1773119888523851070
+  }
+}

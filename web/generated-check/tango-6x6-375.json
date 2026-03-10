@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "id": "tango-6x6-375",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 3,
+      "value": "sun"
+    },
+    {
+      "r": 1,
+      "c": 3,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 5,
+      "value": "moon"
+    }
+  ],
+  "relations": [
+    {
+      "r": 1,
+      "c": 2,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 3,
+      "c": 4,
+      "dir": "down",
+      "type": "same"
+    }
+  ],
+  "solution": [
+    "SMMSSM",
+    "SMMSMS",
+    "MSSMMS",
+    "MSMSSM",
+    "SMSMSM",
+    "MSSMMS"
+  ],
+  "difficulty": {
+    "label": "hard",
+    "score": 159,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "searchNodes": 6,
+    "seed": 1773119888522615706
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "id": "tango-6x6-041",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 0,
+      "value": "sun"
+    },
+    {
+      "r": 0,
+      "c": 2,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 0,
+      "c": 5,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "value": "sun"
+    },
+    {
+      "r": 2,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 3,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 3,
+      "c": 2,
+      "value": "moon"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 5,
+      "c": 1,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 0,
+      "c": 2,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 1,
+      "c": 5,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 3,
+      "c": 2,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 4,
+      "c": 2,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 4,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 5,
+      "c": 4,
+      "dir": "right",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "SSMMSM",
+    "SMSSMM",
+    "MMSMSS",
+    "MSMSSM",
+    "SMMSMS",
+    "MSSMMS"
+  ],
+  "difficulty": {
+    "label": "medium",
+    "score": 52,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "seed": 1773119283866291760
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "id": "tango-6x6-083",
+  "size": 6,
+  "rules": {
+    "balance": true,
+    "maxAdjacent": 2
+  },
+  "givens": [
+    {
+      "r": 0,
+      "c": 3,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 0,
+      "value": "moon"
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "value": "moon"
+    },
+    {
+      "r": 2,
+      "c": 5,
+      "value": "sun"
+    },
+    {
+      "r": 3,
+      "c": 0,
+      "value": "sun"
+    },
+    {
+      "r": 5,
+      "c": 0,
+      "value": "sun"
+    }
+  ],
+  "relations": [
+    {
+      "r": 1,
+      "c": 5,
+      "dir": "down",
+      "type": "same"
+    },
+    {
+      "r": 2,
+      "c": 0,
+      "dir": "down",
+      "type": "different"
+    },
+    {
+      "r": 3,
+      "c": 0,
+      "dir": "right",
+      "type": "different"
+    },
+    {
+      "r": 5,
+      "c": 2,
+      "dir": "right",
+      "type": "same"
+    },
+    {
+      "r": 5,
+      "c": 3,
+      "dir": "right",
+      "type": "different"
+    }
+  ],
+  "solution": [
+    "SSMMSM",
+    "MMSSMS",
+    "MSMMSS",
+    "SMSSMM",
+    "MSMMSS",
+    "SMSSMM"
+  ],
+  "difficulty": {
+    "label": "hard",
+    "score": 140,
+    "techniques": [
+      "line-candidate",
+      "relation",
+      "triple"
+    ],
+    "searchNodes": 10,
+    "seed": 1773119888520303358
+  }
+}

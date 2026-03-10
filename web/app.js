@@ -78,8 +78,9 @@ async function loadPuzzleManifest() {
   packedPuzzleFiles = window.TANGO_GENERATED_PACK?.files ?? [];
   if (packedPuzzleFiles.length > 0) {
     populatePuzzlePicker(packedPuzzleFiles);
-    puzzlePickerEl.value = packedPuzzleFiles[0];
-    await loadPackedPuzzle(packedPuzzleFiles[0]);
+    const initialFile = pickRandomPuzzle();
+    puzzlePickerEl.value = initialFile;
+    await loadPackedPuzzle(initialFile);
     return;
   }
   puzzlePickerEl.innerHTML = '<option value="">No bundled puzzles</option>';
@@ -454,6 +455,13 @@ function pickRandomNextPuzzle() {
   const candidates = packedPuzzleFiles.filter((fileName) => fileName !== currentFile);
   const pool = candidates.length > 0 ? candidates : packedPuzzleFiles;
   return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function pickRandomPuzzle() {
+  if (packedPuzzleFiles.length === 0) {
+    return null;
+  }
+  return packedPuzzleFiles[Math.floor(Math.random() * packedPuzzleFiles.length)];
 }
 
 function formatElapsed(ms) {

@@ -17,6 +17,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -27,12 +32,13 @@ body {
     radial-gradient(circle at bottom right, rgba(40, 64, 81, 0.18), transparent 30%),
     linear-gradient(180deg, #fff8eb 0%, #efe5d4 100%);
   overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 .shell {
-  width: min(100vw - 1rem, 1100px);
+  width: 100%;
   margin: 0 auto;
-  padding: 0.9rem 0 2rem;
+  padding: 0.9rem 0.5rem 2rem;
 }
 
 .hero {
@@ -118,6 +124,8 @@ body {
   background: rgba(255, 255, 255, 0.92);
   color: var(--text);
   font: inherit;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #file-input {
@@ -154,6 +162,8 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cell:hover {
@@ -222,8 +232,7 @@ body {
 
 @media (min-width: 640px) {
   .shell {
-    width: min(100vw - 1.5rem, 1100px);
-    padding-top: 1.4rem;
+    padding: 1.4rem 0.75rem 2rem;
   }
 
   .hero {
@@ -259,8 +268,7 @@ body {
 
 @media (min-width: 900px) {
   .shell {
-    width: min(100vw - 2rem, 1100px);
-    padding: 2rem 0 3rem;
+    padding: 2rem 1rem 3rem;
   }
 
   .hero {

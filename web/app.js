@@ -27,6 +27,7 @@ let conflictTimeoutId = null;
 let conflictRenderToken = 0;
 let visibleConflictKeys = new Set();
 let visibleConflictMessages = [];
+let confettiPlayed = false;
 
 const boardEl = document.getElementById("board");
 const statusTextEl = document.getElementById("status-text");
@@ -52,6 +53,8 @@ function loadPuzzle(nextPuzzle) {
   );
   resetTimer();
   resetState();
+  clearConfetti();
+  confettiPlayed = false;
   puzzleIdEl.textContent = puzzle.id;
   difficultyEl.textContent = puzzle.difficulty?.label ?? "-";
   showMessage("Puzzle loaded.");
@@ -286,6 +289,10 @@ function updateStatus(validation) {
   if (validation.solved) {
     statusTextEl.textContent = "Solved";
     stopTimer();
+    if (!confettiPlayed) {
+      launchConfetti();
+      confettiPlayed = true;
+    }
     showMessage(`Puzzle solved in ${formatElapsed(timerElapsedMs)}.`, "ok");
     return;
   }
@@ -379,6 +386,39 @@ function paintVisibleConflicts() {
     const row = Number(cell.dataset.row);
     const col = Number(cell.dataset.col);
     cell.classList.toggle("error", visibleConflictKeys.has(keyFor(row, col)));
+  }
+}
+
+function launchConfetti() {
+  clearConfetti();
+
+  const layer = document.createElement("div");
+  layer.className = "confetti-layer";
+
+  const colors = ["#f2b705", "#ffdf6b", "#2d5f9a", "#6ea8e0", "#f27f0c", "#f25c54"];
+  for (let index = 0; index < 36; index += 1) {
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colors[index % colors.length];
+    piece.style.animationDelay = `${Math.random() * 0.35}s`;
+    piece.style.animationDuration = `${2.1 + Math.random() * 1.2}s`;
+    piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 18}vw`);
+    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+    layer.appendChild(piece);
+  }
+
+  document.body.appendChild(layer);
+  window.setTimeout(() => {
+    if (layer.parentNode) {
+      layer.remove();
+    }
+  }, 3600);
+}
+
+function clearConfetti() {
+  for (const layer of document.querySelectorAll(".confetti-layer")) {
+    layer.remove();
   }
 }
 

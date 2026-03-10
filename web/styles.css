@@ -246,6 +246,46 @@ body {
   line-height: 1.45;
 }
 
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -12vh;
+  width: 0.7rem;
+  height: 1.2rem;
+  border-radius: 0.2rem;
+  opacity: 0.95;
+  animation:
+    confetti-fall linear forwards,
+    confetti-spin 700ms linear infinite;
+}
+
+@keyframes confetti-fall {
+  from {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate3d(var(--drift), 120vh, 0) rotate(540deg);
+  }
+}
+
+@keyframes confetti-spin {
+  from {
+    filter: saturate(1);
+  }
+
+  to {
+    filter: saturate(1.25);
+  }
+}
+
 @media (min-width: 640px) {
   .shell {
     padding: 1.4rem 0.75rem 2rem;

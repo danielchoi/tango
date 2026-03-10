@@ -1,7 +1,6 @@
-const SYMBOLS = {
-  0: "",
-  1: "S",
-  2: "M",
+const ICON_TEXT = {
+  1: "\u2600",
+  2: "\u263D",
 };
 
 const VALUE_FROM_NAME = {
@@ -146,12 +145,18 @@ function renderBoard() {
       if (visibleConflictKeys.has(keyFor(r, c))) {
         cell.classList.add("error");
       }
-      cell.textContent = SYMBOLS[value];
       cell.style.gridColumn = String(c * 2 + 1);
       cell.style.gridRow = String(r * 2 + 1);
       cell.dataset.row = String(r);
       cell.dataset.col = String(c);
       cell.setAttribute("aria-label", `Row ${r + 1} column ${c + 1}`);
+      if (value !== 0) {
+        const symbol = document.createElement("span");
+        symbol.className = value === 1 ? "symbol sun-icon" : "symbol moon-icon";
+        symbol.textContent = ICON_TEXT[value];
+        symbol.setAttribute("aria-hidden", "true");
+        cell.appendChild(symbol);
+      }
       cell.addEventListener("click", () => {
         if (given) {
           return;
@@ -359,7 +364,7 @@ function syncConflictDisplay(validation) {
     visibleConflictMessages = validation.errors;
     updateStatus(validation);
     paintVisibleConflicts();
-  }, 500);
+  }, 1000);
 }
 
 function clearConflictTimeout() {
